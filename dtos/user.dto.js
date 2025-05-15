@@ -4,7 +4,7 @@ module.exports = class UserDto {
     isOnline
 
     constructor(model){
-        this.email = model.username
+        this.username = model.username
         this.id = model._id
         this.isOnline = model.isOnline
     }
