@@ -10,7 +10,8 @@ const userSchema = new Schema({
     isOnline : { type : Boolean, default : false },
     rating : { type : Number },
     currentRoomId : { type : String, default : null},
-    picture : { type : String }
+    picture : { type : String },
+    myBooks : { type : [String]}
 }, { timestamps : true })
 
 module.exports = model('User', userSchema) 
