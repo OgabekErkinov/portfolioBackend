@@ -27,7 +27,7 @@ class UserController {
       async updateRating (req, res) {
         try {
           const { id, rating } = req.body
-          const updatedUser = await userService.updatedRating(id, rating)
+          const updatedUser = await userService.updatedRating(email, rating)
           res.status(200).json(updatedUser)
         } catch (error) {
           res.status(500).json(error)

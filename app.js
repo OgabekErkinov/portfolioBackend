@@ -4,11 +4,16 @@ const mongoose = require('mongoose')
 const fileUpload = require('express-fileupload')
 const userModels = require('./models/user.model')
 const cookieParser = require('cookie-parser')
+const cors = require('cors')
 
 const app = express()
 app.use(express.json())
 app.use(fileUpload())
 app.use(cookieParser())
+app.use(cors({
+  origin: '*', 
+  credentials: true 
+}))
 
 app.get('/', (req, res) => {
   res.send('Portfolio backend is working!');
