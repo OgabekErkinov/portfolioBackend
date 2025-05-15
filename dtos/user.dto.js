@@ -1,0 +1,12 @@
+module.exports = class UserDto {
+    username
+    id
+    isOnline
+
+    constructor(model){
+        this.email = model.username
+        this.id = model._id
+        this.isOnline = model.isOnline
+    }
+
+}

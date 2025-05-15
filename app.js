@@ -1,37 +1,27 @@
 require('dotenv').config()
-
 const express = require('express')
 const mongoose = require('mongoose')
-const userModels = require('./models/user.models')
-const userController = require('./controllers/user.controller')
-
-
+const fileUpload = require('express-fileupload')
+const userModels = require('./models/user.model')
+const cookieParser = require('cookie-parser')
 
 const app = express()
 app.use(express.json())
+app.use(fileUpload())
+app.use(cookieParser())
+
+app.use('/api/auth', require('./routers/auth.route'))
+app.use('/api', require('./routers/user.route'))
 
 const PORT = process.env.PORT || 8080
 
-app.get('/', userController)
-
-app.post('/', async (req, res) => {
-    try {
-        const {userName, phone} = req.body
-        const newUser = await userModels.create({userName, phone})
-        res.send(newUser)
-    } catch (error) {
-        res.status(500).json(error)
-        
-    }
-})
-
 const startDB = async () => {
     try {
-        await mongoose.connect(process.env.DB_URL, {}).then(() => console.log('connected to DB'))
-        app.listen(PORT, () => console.log('POrt ishladi'))
+        await mongoose.connect(process.env.DB_URL, {})
+        console.log('connected to DB')
+        app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
     } catch (error) {
-        console.log('serverga ulanishda xato' , error)
-        
+        console.log('Error connecting to the server', error)
     }
 }
 
