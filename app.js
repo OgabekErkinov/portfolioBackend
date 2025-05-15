@@ -10,8 +10,12 @@ app.use(express.json())
 app.use(fileUpload())
 app.use(cookieParser())
 
+app.get('/', (req, res) => {
+  res.send('Portfolio backend is working!');
+});
 app.use('/api/auth', require('./routers/auth.route'))
 app.use('/api', require('./routers/user.route'))
+app.use('/api', require('./routers/book.route'))
 
 const PORT = process.env.PORT || 8080
 
